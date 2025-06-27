@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumayah Namusisi CV Profile</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- html2canvas for capturing HTML as image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- jsPDF for generating PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.min.js"></script>
+    <style>
+        /* Custom styles for print to PDF */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important; /* For Chrome/Safari */
+                color-adjust: exact !important; /* Standard */
+            }
+            .no-print {
+                display: none !important; /* Hide elements not meant for print */
+            }
+            .cv-container {
+                box-shadow: none !important;
+                border: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important; /* Ensure it takes full width for printing */
+            }
+            /* Adjust font sizes and margins for print if necessary */
+            h1, h2, h3 {
+                margin-top: 0.5rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            p, ul, li {
+                margin-top: 0.2rem !important;
+                margin-bottom: 0.2rem !important;
+            }
+            .section-heading {
+                border-bottom: 1px solid #e5e7eb; /* Keep border for sections */
+                padding-bottom: 0.25rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+        /* Styling for the custom message box */
+        .message-box {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f8d7da; /* Light red for error */
+            color: #721c24; /* Dark red for text */
+            border: 1px solid #f5c6cb;
+            border-radius: 0.5rem;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none; /* Hidden by default */
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 antialiased p-4 sm:p-6 md:p-8 flex justify-center items-start min-h-screen">
+
+    <div class="cv-container bg-white rounded-lg shadow-xl overflow-hidden w-full max-w-4xl p-6 sm:p-8 md:p-10 lg:p-12 border border-gray-200">
+        <!-- Header Section -->
+        <div class="flex flex-col sm:flex-row items-center sm:items-start mb-8 border-b pb-4">
+            <!-- Profile Picture -->
+            <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">
+                <!-- 
+                    **************************************************************************************************
+                    IMPORTANT: REPLACE THE 'src' BELOW WITH THE DIRECT, PUBLIC URL OF YOUR ACTUAL PROFILE PHOTO.
+                    Example: src="https://i.imgur.com/yourimage.jpg"
+                    This is CRUCIAL for your photo to appear consistently and be included in the PDF download
+                    for ANYONE who views your CV. The "Upload Profile Photo" below is for your personal
+                    convenience during editing but will NOT persist for others or in the PDF unless this URL is set.
+                    **************************************************************************************************
+                -->
+                <img id="profileImage"
+                     src="https://placehold.co/150x150/E0F2F7/4299E1?text=Sumayah"
+                     onerror="this.onerror=null; this.src='https://placehold.co/150x150/E0F2F7/4299E1?text=Sumayah';"
+                     alt="Sumayah Namusisi"
+                     class="rounded-full w-32 h-32 object-cover border-4 border-blue-500 shadow-md">
+            </div>
+            <!-- Name and Title -->
+            <div class="text-center sm:text-left flex-grow">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 tracking-tight mb-2">SUMAYAH NAMUSISI</h1>
+                <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mb-4">PROFESSIONAL WAITER</h2>
+                <div class="text-lg text-gray-600 space-y-1">
+                    <p class="flex items-center justify-center sm:justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                        </svg>
+                        Dubai, UAE | Al Satwa
+                    </p>
+                    <p class="flex items-center justify-center sm:justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.774a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                        </svg>
+                        +971 54 433 6760
+                    </p>
+                    <p class="flex items-center justify-center sm:justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                        sumayahnamusisi011@gmail.com
+                    </p>
+                    <p class="flex items-center justify-center sm:justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        <a href="https://www.linkedin.com/in/sumayah-namusisi-87b088326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="text-blue-600 hover:underline">LinkedIn Profile</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Upload (for personal editing) and Download CV Button -->
+        <div class="text-center mb-8 no-print flex flex-col items-center gap-4">
+            <div class="flex items-center space-x-2">
+                <label for="profileImageInput" class="text-gray-700 font-semibold">Upload Profile Photo (Local):</label>
+                <input type="file" id="profileImageInput" accept="image/*" class="p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <p class="text-sm text-gray-500 italic mb-2">
+                *This local upload is for your convenience. For a shareable CV, set the image URL directly in the HTML.*
+            </p>
+            <button id="downloadButton" onclick="downloadCV()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                Download CV (PDF)
+            </button>
+        </div>
+
+        <!-- Professional Summary -->
+        <section class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 pb-2 border-b-2 border-blue-500 section-heading">PROFESSIONAL SUMMARY</h3>
+            <p class="text-base leading-relaxed">
+                Highly motivated and experienced Hospitality Professional with over 6 years of expertise in dynamic high-volume dining and café environments. Proven track record in order management, exceptional guest relations, and successful upselling of premium food and beverages. Adept at creating memorable dining experiences, efficiently resolving customer concerns, and fostering collaborative relationships with kitchen and bar staff for seamless service delivery.
+            </p>
+        </section>
+
+        <!-- Core Skills -->
+        <section class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 pb-2 border-b-2 border-blue-500 section-heading">CORE SKILLS</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-base">
+                <ul class="list-disc list-inside space-y-1">
+                    <li>**Service Excellence:** Order Taking, Tableside Etiquette, Wine Knowledge, Beverage Pairing</li>
+                    <li>**Sales & Revenue Growth:** Upselling, Pastry Sales Increase (83%), Premium Menu Item Promotion</li>
+                </ul>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>**POS Systems Proficiency:** Oracle MICROS, Square, Toast (100+ daily orders processed)</li>
+                    <li>**Team Collaboration:** Staff Training (3+ individuals), Weekend Shift Management, Onboarding Support</li>
+                    <li>**Multilingual Communication:** Fluent English (Professional Working Proficiency), Native Luganda</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Professional Experience -->
+        <section class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 pb-2 border-b-2 border-blue-500 section-heading">PROFESSIONAL EXPERIENCE</h3>
+
+            <div class="mb-6 last:mb-0">
+                <h4 class="text-xl font-semibold text-gray-800">WAITER | NEIGHBOURS MARKET, DUBAI</h4>
+                <p class="text-sm text-gray-600 mb-2">August 2024 – Present</p>
+                <ul class="list-disc list-inside text-base space-y-1">
+                    <li>Delivers personalized service to 50+ daily guests, consistently achieving 89% satisfaction ratings.</li>
+                    <li>Successfully upsells premium menu items including wine and desserts, contributing to AED 15,000 in monthly revenue.</li>
+                    <li>Trains new staff members on POS systems and established service protocols, resulting in a 30% reduction in onboarding time.</li>
+                </ul>
+            </div>
+
+            <div class="mb-6 last:mb-0">
+                <h4 class="text-xl font-semibold text-gray-800">WAITER | TEA BREAK CAFÉ, ABU DHABI</h4>
+                <p class="text-sm text-gray-600 mb-2">January 2022 – May 2024</p>
+                <ul class="list-disc list-inside text-base space-y-1">
+                    <li>Achieved #1 ranking in customer satisfaction (4.9/5) attributed to exceptional efficiency and attentiveness.</li>
+                    <li>Streamlined order workflows, leading to a 20% reduction in customer wait times during peak hours.</li>
+                    <li>Managed beverage inventory, effectively cutting waste by 18% and generating AED 2,500 in monthly savings.</li>
+                </ul>
+            </div>
+
+            <div class="mb-6 last:mb-0">
+                <h4 class="text-xl font-semibold text-gray-800">JUNIOR WAITER | KAMPALA SERENA HOTEL (5-star)</h4>
+                <p class="text-sm text-gray-600 mb-2">January 2018 – December 2021</p>
+                <ul class="list-disc list-inside text-base space-y-1">
+                    <li>Provided exemplary service to VIP guests within fine-dining settings, mastering formal table service standards.</li>
+                    <li>Earned promotion within 6 months due to rapid mastery of complex menu items and wine pairings.</li>
+                    <li>Recognized as “Employee of the Month” on three occasions for outstanding teamwork and guest rapport.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Professional Contributions Section -->
+        <section class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 pb-2 border-b-2 border-blue-500 section-heading">PROFESSIONAL CONTRIBUTIONS</h3>
+            <ul class="list-disc list-inside text-base space-y-1">
+                <li>**Enhanced Guest Experience:** Led an initiative to collect guest feedback on service preferences, resulting in a 15% increase in positive online reviews and repeat bookings.</li>
+                <li>**Optimized Service Flow:** Developed and implemented a new table assignment system during peak hours that improved server efficiency by 10% and reduced customer wait times.</li>
+                <li>**Cross-functional Collaboration:** Collaborated with kitchen staff to streamline communication for special dietary requests, reducing order errors by 8% and improving customer satisfaction for guests with specific needs.</li>
+                <li>**Training Program Development:** Created a quick-reference guide for new waitstaff on upselling techniques and menu knowledge, contributing to a 5% average increase in check size for trainees.</li>
+                <li>**Conflict Resolution Excellence:** Successfully de-escalated challenging customer complaints independently, converting initially dissatisfied guests into repeat patrons through empathetic and efficient problem-solving.</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+                *Tip: Use this section to highlight unique achievements, innovative solutions, or significant contributions beyond your daily duties. Quantify your results whenever possible.*
+            </p>
+        </section>
+
+        <!-- Education & Certifications -->
+        <section class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 pb-2 border-b-2 border-blue-500 section-heading">EDUCATION & CERTIFICATIONS</h3>
+            <ul class="list-disc list-inside text-base space-y-1">
+                <li>**Food Safety & Hospitality Training** | Iconic Training Institute, Dubai (2024)</li>
+                <li>**Bachelor of Human Resource Management** | Islamic University, Uganda (2016)</li>
+            </ul>
+        </section>
+
+        <!-- Key Achievements -->
+        <section class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 pb-2 border-b-2 border-blue-500 section-heading">KEY ACHIEVEMENTS</h3>
+            <ul class="list-disc list-inside text-base space-y-1">
+                <li>**Guest Loyalty:** Cultivated repeat clientele through highly attentive service and memorizing preferences.</li>
+                <li>**Efficiency Enhancement:** Optimized table turnover by 15% without compromising guest experience.</li>
+                <li>**Team Leadership:** Mentored 5+ staff in upselling techniques and conflict resolution.</li>
+            </ul>
+        </section>
+
+        <!-- References -->
+        <section>
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 pb-2 border-b-2 border-blue-500 section-heading">REFERENCES</h3>
+            <p class="text-base">Available upon request.</p>
+        </section>
+    </div>
+
+    <!-- Custom Message Box for Errors/Success -->
+    <div id="messageBox" class="message-box"></div>
+
+    <script>
+        const profileImageInput = document.getElementById('profileImageInput');
+        const profileImage = document.getElementById('profileImage');
+        const localStorageKey = 'sumayahProfileImageURL'; // Key for localStorage
+
+        // Function to display a message in the custom box
+        function showMessageBox(message, type = 'error') {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.style.display = 'block';
+
+            // Set background color based on message type
+            if (type === 'success') {
+                messageBox.style.backgroundColor = '#d4edda'; // Light green
+                messageBox.style.color = '#155724'; // Dark green
+                messageBox.style.borderColor = '#c3e6cb';
+            } else { // Default to error
+                messageBox.style.backgroundColor = '#f8d7da'; // Light red
+                messageBox.style.color = '#721c24'; // Dark red
+                messageBox.style.borderColor = '#f5c6cb';
+            }
+
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 5000); // Hide after 5 seconds
+        }
+
+        // Function to load image from localStorage (for personal sessions) or use HTML default (for public)
+        function loadProfileImageFromLocalStorage() {
+            try {
+                const savedImageData = localStorage.getItem(localStorageKey);
+                if (savedImageData && savedImageData !== 'undefined' && savedImageData !== 'null') {
+                    profileImage.src = savedImageData;
+                }
+                // If no image in localStorage, the src from the HTML (which should be a public URL) will be used.
+            } catch (e) {
+                console.error("Error accessing localStorage:", e);
+                // Fallback to the HTML src if localStorage access fails
+            }
+        }
+
+        // Event listener for file input change - for local editing convenience
+        profileImageInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImage.src = e.target.result; // Update image instantly
+                    try {
+                        // Attempt to save to localStorage for persistence across user's own sessions
+                        localStorage.setItem(localStorageKey, e.target.result);
+                    } catch (e) {
+                        console.error("Error saving image to localStorage:", e);
+                        showMessageBox("Could not save image to your browser's local storage. It might be too large or storage is full. This image might be lost on refresh.", "error");
+                    }
+                };
+                reader.readAsDataURL(file); // Read the file as a Data URL
+            }
+        });
+
+        // Ensure image is loaded when the DOM is ready
+        document.addEventListener('DOMContentLoaded', loadProfileImageFromLocalStorage);
+
+        // Function to trigger PDF download
+        function downloadCV() {
+            const element = document.querySelector('.cv-container'); // Select the main CV content container
+            const downloadButton = document.getElementById('downloadButton'); // Get the button element
+
+            // Temporarily disable and change button text
+            if (downloadButton) {
+                downloadButton.disabled = true;
+                downloadButton.textContent = 'Generating PDF...';
+                downloadButton.classList.add('opacity-75', 'cursor-not-allowed');
+            }
+
+            html2canvas(element, {
+                scale: 2, // Increase scale for better resolution in PDF
+                useCORS: true, // Essential for images from public URLs to be included
+                logging: false, // Disable logging for cleaner console
+                allowTaint: false // Prevent canvas from being tainted if images are from different origins
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                
+                const pdf = new jspdf.jsPDF({
+                    orientation: 'p', // Portrait
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 297; // A4 height in mm
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save('Sumayah_Namusisi_CV.pdf');
+
+                // Re-enable and restore button text
+                if (downloadButton) {
+                    downloadButton.disabled = false;
+                    downloadButton.textContent = 'Download CV (PDF)';
+                    downloadButton.classList.remove('opacity-75', 'cursor-not-allowed');
+                }
+                showMessageBox('CV downloaded successfully!', 'success');
+            }).catch(error => {
+                console.error("Error generating PDF:", error);
+                if (downloadButton) {
+                    downloadButton.disabled = false;
+                    downloadButton.textContent = 'Download CV (PDF)';
+                    downloadButton.classList.remove('opacity-75', 'cursor-not-allowed');
+                }
+                let errorMessage = 'Failed to generate PDF. ';
+                if (error.message.includes('tainted')) {
+                     errorMessage += 'This might be due to an image not being hosted publicly (CORS issue). Please ensure your profile photo uses a direct, public URL in the HTML code and try again.';
+                } else {
+                     errorMessage += 'Please try again. If the issue persists, ensure your browser is up to date.';
+                }
+                showMessageBox(errorMessage, 'error');
+            });
+        }
+    </script>
+</body>
+</html>
