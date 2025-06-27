@@ -9,7 +9,7 @@
     <!-- html2canvas for capturing HTML as image -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- jsPDF for generating PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         @media print {
             body {
@@ -84,7 +84,7 @@
                     </p>
                     <p class="flex items-center justify-center sm:justify-start">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.774a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986[...]
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.774a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986l.74 4.435A1 1 0 0117 17H3a1 1 0 01-1-1V3z" />
                         </svg>
                         +971 54 433 6760
                     </p>
@@ -97,9 +97,9 @@
                     </p>
                     <p class="flex items-center justify-center sm:justify-start">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.[...]
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764c.967 0 1.75.79 1.75 1.764s-.783 1.764-1.75 1.764zm15.5 12.268h-3v-5.604c0-1.337-.025-3.064-1.868-3.064-1.87 0-2.156 1.46-2.156 2.967v5.701h-3v-11h2.884v1.501h.041c.402-.762 1.384-1.563 2.848-1.563 3.046 0 3.609 2.005 3.609 4.615v6.447z"/>
                         </svg>
-                        <a href="https://www.linkedin.com/in/sumayah-namusisi-87b088326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="text-blue[...]
+                        <a href="https://www.linkedin.com/in/sumayah-namusisi-87b088326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="text-blue-600 underline">LinkedIn Profile</a>
                     </p>
                 </div>
             </div>
@@ -118,7 +118,6 @@
                 <button id="downloadButton" onclick="downloadCV()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-400">
                     Download CV (PDF)
                 </button>
-                <!-- NEW BUTTON FOR TEXT-BASED PDF -->
                 <button id="downloadTextPdfButton" onclick="downloadTextCV()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-400">
                     Download CV (Text PDF)
                 </button>
@@ -228,7 +227,7 @@
     <script>
         const profileImageInput = document.getElementById('profileImageInput');
         const profileImage = document.getElementById('profileImage');
-        const localStorageKey = 'sumayahProfileImageURL'; // Key for localStorage
+        const localStorageKey = 'sumayahProfileImageURL';
 
         function showMessageBox(message, type = 'error') {
             const messageBox = document.getElementById('messageBox');
@@ -280,17 +279,15 @@
 
         document.addEventListener('DOMContentLoaded', loadProfileImageFromLocalStorage);
 
-        // Existing screenshot PDF download
+        // Screenshot PDF download
         function downloadCV() {
             const element = document.querySelector('.cv-container');
             const downloadButton = document.getElementById('downloadButton');
-
             if (downloadButton) {
                 downloadButton.disabled = true;
                 downloadButton.textContent = 'Generating PDF...';
                 downloadButton.classList.add('opacity-75', 'cursor-not-allowed');
             }
-
             html2canvas(element, {
                 scale: 2,
                 useCORS: true,
@@ -298,25 +295,22 @@
                 allowTaint: false
             }).then(canvas => {
                 const imgData = canvas.toDataURL('image/png');
-                const pdf = new jspdf.jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
                 const imgWidth = 210;
                 const pageHeight = 297;
                 const imgHeight = canvas.height * imgWidth / canvas.width;
                 let heightLeft = imgHeight;
                 let position = 0;
-
                 pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
-
                 while (heightLeft > 0) {
                     position = heightLeft - imgHeight;
                     pdf.addPage();
                     pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
                     heightLeft -= pageHeight;
                 }
-
                 pdf.save('Sumayah_Namusisi_CV.pdf');
-
                 if (downloadButton) {
                     downloadButton.disabled = false;
                     downloadButton.textContent = 'Download CV (PDF)';
@@ -345,16 +339,14 @@
 SUMAYAH NAMUSISI
 PROFESSIONAL WAITER
 
-CONTACT INFORMATION
 Dubai, UAE | Al Satwa
 Phone: +971 54 433 6760
 Email: sumayahnamusisi011@gmail.com
-LinkedIn: https://www.linkedin.com/in/sumayah-namusisi-87b088326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
 
 PROFESSIONAL SUMMARY
 Highly motivated and experienced Hospitality Professional with over 6 years of expertise in dynamic high-volume dining and café environments. Proven track record in order management, exceptional guest relations, and successful upselling of premium food and beverages. Adept at creating memorable dining experiences, efficiently resolving customer concerns, and fostering collaborative relationships with kitchen and bar staff for seamless service delivery.
 
-CORE COMPETENCIES
+CORE SKILLS
 Service Excellence: Order Taking, Tableside Etiquette, Wine Knowledge, Beverage Pairing
 Sales & Revenue Growth: Upselling, Pastry Sales Increase (83%), Premium Menu Item Promotion
 POS Systems Proficiency: Oracle MICROS, Square, Toast (100+ daily orders processed)
@@ -389,8 +381,8 @@ PROFESSIONAL CONTRIBUTIONS
 - Conflict Resolution Excellence: Successfully de-escalated challenging customer complaints independently, converting initially dissatisfied guests into repeat patrons through empathetic and efficient problem-solving.
 
 EDUCATION & CERTIFICATIONS
-- Food Safety & Hospitality Training | Iconic Training Institute, Dubai (2024)
-- Bachelor of Human Resource Management | Islamic University, Uganda (2016)
+Food Safety & Hospitality Training | Iconic Training Institute, Dubai (2024)
+Bachelor of Human Resource Management | Islamic University, Uganda (2016)
 
 KEY ACHIEVEMENTS
 - Guest Loyalty: Cultivated repeat clientele through highly attentive service and memorizing preferences.
@@ -402,12 +394,13 @@ Available upon request.
 `;
 
         function downloadTextCV() {
-            const doc = new jspdf.jsPDF({
+            // Using jsPDF from the UMD bundle loaded above
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
                 orientation: 'p',
                 unit: 'mm',
                 format: 'a4'
             });
-
             const lines = doc.splitTextToSize(textCVContent, 190);
             let y = 15;
             doc.setFont('helvetica', 'normal');
